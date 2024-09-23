@@ -1,15 +1,25 @@
 <script lang="ts">
+	import Popmod from "./popmod.svelte";
+
 	interface Props {
 		colonne: any[];
 		data: any[];
+		valore?: string;
 
 		children?: any;
 	}
 
-	let { colonne, data, children }: Props = $props();
+	let { colonne, data, valore = $bindable(), children }: Props = $props();
 
 	// La funzione per ottenere il numero di colonne (opzionale se non è necessario)
 	const numColonne = () => colonne.length;
+
+	let rowIndex: number;
+	let colIndex: number;
+	function handleCellClick(rowIndex: number, colIndex: number, value: any) {
+		console.log(`Cella cliccata: Riga ${rowIndex}, Colonna ${colIndex}, Valore:`, value);
+		valore = value;
+	}
 </script>
 
 <table>
@@ -21,10 +31,12 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each data as row}
+		{#each data as row, rowIndex}
 			<tr>
-				{#each colonne as column, index}
-					<td>{row[index]}</td> <!-- Dati corrispondenti alla colonna -->
+				{#each colonne as column, colIndex}
+					<td onclick={() => handleCellClick(rowIndex, colIndex, row[colIndex])}>
+						{row[colIndex]}
+					</td> <!-- Dati corrispondenti alla colonna -->
 				{/each}
 			</tr>
 		{/each}
@@ -39,13 +51,16 @@
 
 	th,
 	td {
-		padding: 8px;
+		padding: 6px;
 		border: 1px solid #f3f7f5;
 		text-align: left;
+		width:fit-content;
+		cursor:pointer;
 	}
 
 	tr:hover {
 		background-color: lightgray;
+		
 	}
 
 	th {

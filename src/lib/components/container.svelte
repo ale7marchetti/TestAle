@@ -30,6 +30,8 @@
 
 		border: 1px solid #ccc;
 		border-radius: 0.5rem;
+
+		font-size: small;
 	}
 
 	.title {
