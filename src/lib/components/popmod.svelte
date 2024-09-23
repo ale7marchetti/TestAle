@@ -12,7 +12,6 @@
 
     function chiudi() {
         isOpen = false;
-        valore = "";
     }
 
 </script>
