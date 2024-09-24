@@ -3,6 +3,7 @@
 	import Popmod from '$lib/components/popmod.svelte';
 	import Tabella from '$lib/components/tabella.svelte';
 	import { onMount } from 'svelte';
+	
 
 	let province: any[] = [];
 	let url = '/province.json';
@@ -47,20 +48,21 @@
 
 <Container title="Province" direction="column">
 	<br>
-
+	
 	<input type="text" bind:value={valore} />
 
 	<button onclick={apripop}>Apri popup</button>
 	{#if sw_apri} 	
-		<Popmod {titolo} {valore} ></Popmod>
+		<Popmod {titolo} {valore} onclose={()=> valore = ""}></Popmod>
 	{/if}
 	
 	<br>
 	<Tabella {colonne} {data} bind:valore></Tabella>
-
-	{#if valore == "AG" || valore == "BO"} 
-		<Popmod {titolo} {valore} ></Popmod>
+	{#key valore}
+	{#if valore} 
+		<Popmod {titolo} {valore} onclose={()=> valore = ""} ></Popmod>
 	{/if}	
+	{/key}
 
 	<span>Le province italiane sono {data.length}</span>
 </Container>

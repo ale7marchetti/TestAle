@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Popmod from "./popmod.svelte";
-
+	
 	interface Props {
 		colonne: any[];
 		data: any[];
@@ -14,8 +13,8 @@
 	// La funzione per ottenere il numero di colonne (opzionale se non è necessario)
 	const numColonne = () => colonne.length;
 
-	let rowIndex: number;
-	let colIndex: number;
+	//let rowIndex: number;
+	//let colIndex: number;
 	function handleCellClick(rowIndex: number, colIndex: number, value: any) {
 		console.log(`Cella cliccata: Riga ${rowIndex}, Colonna ${colIndex}, Valore:`, value);
 		valore = value;
